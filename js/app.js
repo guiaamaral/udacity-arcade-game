@@ -12,13 +12,13 @@ var Enemy = function(x,y) {
 Enemy.prototype.update = function(dt) {
     this.x += 101 * dt * this.multiplier;
 
-    // If the enemy thrash the player, reset him
+    // If the enemy crash the player, the player loses 1 life and start the game again
     if (this.y == player.y && (this.x > player.x - 20 && this.x < player.x + 20)) {
         player.lifes -= 1;
         player.reset();
     }
 
-    // If the enemy goes off of the board, reset it
+    // If the enemy goes off of the board, reset them
     if (this.x > 505) {
         this.reset();
     }
@@ -42,12 +42,12 @@ Enemy.prototype.render = function() {
 var Player = function(x,y) {
     this.x = x;
     this.y = y;
-    // Save the player initial position
+    // Save initial position
     this.xo = x;
     this.yo = y;
-    // Sets initial score of player
+    // Sets initial score
     this.score = 0;
-    // Sets the number of lifes on start of the game
+    // Set initial number of lifes
     this.lifes = 3;
     this.highScore = 0;
     // Load player avatar
@@ -91,7 +91,7 @@ Player.prototype.update = function(dt) {
     this.x = this.x;
     this.y = this.y;
 
-    // Starts player with no points and 3 lifes
+    // Start player with no points and 3 lifes
     if (this.lifes === 0) {
         this.score = 0;
         this.lifes = 3;
@@ -107,6 +107,7 @@ Player.prototype.update = function(dt) {
         this.reset();
     }
 
+    // Get and set highscore
     if (this.highScore < this.score) {
         this.highScore = this.score;
     }
@@ -136,6 +137,7 @@ for (var i = 0; i < 5; i++) {
     allEnemies.push(enemy);
 }
 
+// Set initial position
 var player = new Player(202, 380);
 
 document.addEventListener('keyup', function(e) {
